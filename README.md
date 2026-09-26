@@ -403,6 +403,8 @@ Pour un entretien français, on conseille :
 
 Les avatars sont définis dans `client/js/data/avatars.js` sous forme d'un **registre** qui pointe vers une **planche de sprites** (`spritesheet.png`).
 
+- Blanc, Marron, etc... : est juste à titre indicatif pour le code source - aucun jugement n'est sous-entendu et ne doit être sous-entendu.
+
 ### Avatars disponibles
 
 | ID | Description |
