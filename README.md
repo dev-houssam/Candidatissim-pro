@@ -463,7 +463,7 @@ export const SPRITESHEET = {
 
 ## Licence
 
-Projet personnel — GPL
+Projet personnel — GPL - GNU GENERAL PUBLIC LICENSE
 
 ---
 
