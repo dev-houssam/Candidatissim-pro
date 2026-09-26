@@ -1,0 +1,492 @@
+.player {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #f8fafc;
+}
+
+
+/* ==================================================
+   EN-TÊTE
+   ================================================== */
+
+.player-header {
+    flex-shrink: 0;
+
+    padding: 24px 32px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.player-title {
+    margin: 0 0 6px;
+    font-size: 24px;
+}
+
+.player-description {
+    margin: 0;
+    color: #64748b;
+}
+
+
+/* ==================================================
+   ZONE DU DIALOGUE
+   ================================================== */
+
+.dialogue-container {
+    position: relative;
+
+    flex: 1;
+    min-height: 0;
+
+    overflow: hidden;
+
+    padding: 0 220px;
+}
+
+
+/* ==================================================
+   AVATARS
+   ================================================== */
+
+.player-avatar {
+    position: absolute;
+
+    top: 50%;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background-color: #eef2f7;
+
+    background-repeat: no-repeat;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, 0.08);
+
+    transition:
+        filter 0.35s ease,
+        opacity 0.35s ease,
+        transform 0.35s ease;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+.player-avatar-recruteur {
+    left: 24px;
+    transform: translateY(-50%);
+}
+
+.player-avatar-candidat {
+    right: 24px;
+    transform:
+        translateY(-50%)
+        scaleX(-1);
+}
+
+.player-avatar.inactive {
+    filter: grayscale(1);
+    opacity: 0.35;
+}
+
+.player-avatar.active {
+    filter: none;
+    opacity: 1;
+}
+
+.player-avatar-recruteur.active {
+    transform:
+        translateY(-50%)
+        scale(1.04);
+}
+
+.player-avatar-candidat.active {
+    transform:
+        translateY(-50%)
+        scaleX(-1)
+        scale(1.04);
+}
+
+
+/* ==================================================
+   ZONE QUI SCROLLE
+   ================================================== */
+
+.dialogue-scroll {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+
+    padding: 28px 0;
+
+    z-index: 2;
+}
+
+
+/* ==================================================
+   LISTE DU DIALOGUE
+   ================================================== */
+
+.dialogue-list {
+    width: min(760px, 100%);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* ==================================================
+   RÉPLIQUES
+   ================================================== */
+
+.dialogue-line {
+    opacity: 0.35;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.dialogue-line.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dialogue-role {
+    margin-bottom: 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+
+    color: #64748b;
+}
+
+
+/* Recruteur */
+.dialogue-line.recruteur {
+    align-self: flex-start;
+    width: 76%;
+}
+
+.dialogue-line.recruteur .dialogue-role {
+    text-align: left;
+}
+
+.dialogue-line.recruteur .dialogue-bubble {
+    background: #e9eef5;
+    color: #1e293b;
+
+    border-radius:
+        8px 20px 20px 8px;
+}
+
+
+/* Candidat */
+.dialogue-line.candidat {
+    align-self: flex-end;
+    width: 76%;
+}
+
+.dialogue-line.candidat .dialogue-role {
+    text-align: right;
+}
+
+.dialogue-line.candidat .dialogue-bubble {
+    background: #2563eb;
+    color: white;
+
+    border-radius:
+        20px 8px 20px 20px;
+}
+
+
+/* Bulle */
+.dialogue-bubble {
+    padding: 14px 18px;
+
+    line-height: 1.5;
+
+    white-space: pre-wrap;
+}
+
+
+/* ==================================================
+   CONTRÔLES
+   ================================================== */
+
+.player-controls {
+    flex-shrink: 0;
+
+    width: 100%;
+
+    padding: 14px 24px 16px;
+
+    background: rgba(255, 255, 255, 0.98);
+
+    border-top: 1px solid #dbe2ea;
+
+    box-shadow:
+        0 -4px 16px rgba(15, 23, 42, 0.06);
+}
+
+
+.timeline {
+    width: min(900px, 100%);
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.timeline-track {
+    flex: 1;
+
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e2e8f0;
+
+    cursor: pointer;
+}
+
+.timeline-progress {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #2563eb;
+
+    transition: width 0.1s linear;
+}
+
+.timeline-info {
+    min-width: 85px;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    font-size: 12px;
+    color: #64748b;
+}
+
+
+.player-buttons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+
+.play-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.play-button:hover {
+    background: #1d4ed8;
+}
+
+.play-button:active {
+    transform: scale(0.96);
+}
+
+
+.fullscreen-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 50%;
+
+    background: white;
+    color: #334155;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.fullscreen-button:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.fullscreen-button:active {
+    transform: scale(0.96);
+}
+
+
+/* ==================================================
+   FIN DE SIMULATION
+   ================================================== */
+
+.player-ended {
+    width: min(760px, 100%);
+
+    margin: 30px auto 10px;
+
+    padding: 24px;
+
+    text-align: center;
+
+    border: 1px solid #dbe2ea;
+    border-radius: 16px;
+
+    background: white;
+}
+
+.player-ended-title {
+    margin: 0 0 6px;
+    font-size: 20px;
+}
+
+.player-ended-text {
+    margin: 0;
+    color: #64748b;
+}
+
+
+/* ==================================================
+   MODE PLEIN ÉCRAN
+   ==================================================
+   On masque le header global de l'appli
+   + le header du player (titre + description).
+   Le dialogue + les avatars + la barre de contrôle
+   occupent tout l'écran.
+   ================================================== */
+
+body.player-fullscreen .application-header {
+    display: none;
+}
+
+body.player-fullscreen .application {
+    height: 100dvh;
+}
+
+body.player-fullscreen .player-header {
+    display: none;
+}
+
+body.player-fullscreen .dialogue-container {
+    padding: 0 260px;
+}
+
+
+/* ==================================================
+   PETITS ÉCRANS
+   ================================================== */
+
+@media (max-width: 1100px) {
+
+    .dialogue-container {
+        padding: 0 180px;
+    }
+
+    .player-avatar {
+        width: 140px;
+        height: 140px;
+    }
+
+    body.player-fullscreen .dialogue-container {
+        padding: 0 200px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .player-header {
+        padding: 18px;
+    }
+
+    .dialogue-container {
+        padding: 0 16px;
+    }
+
+    .player-avatar {
+        position: static;
+
+        width: 80px;
+        height: 80px;
+
+        margin: 12px auto;
+
+        transform: none;
+    }
+
+    .player-avatar-candidat {
+        transform: scaleX(-1);
+    }
+
+    .dialogue-line.recruteur,
+    .dialogue-line.candidat {
+        width: 90%;
+    }
+
+    .player-controls {
+        padding: 12px 14px;
+    }
+}

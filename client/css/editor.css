@@ -1,0 +1,1441 @@
+/* ============================================================
+   ÉDITEUR — STYLES COMPLETS
+   ============================================================ */
+
+
+/* ----------------------------------------
+   Conteneur principal
+   ---------------------------------------- */
+
+.editor {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 24px 32px 0;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+
+/* ----------------------------------------
+   En-tête de l'éditeur
+   ---------------------------------------- */
+
+.editor-header {
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 24px;
+
+    padding-bottom: 24px;
+}
+
+.editor-title-section {
+    flex: 1;
+    max-width: 640px;
+}
+
+.editor-title-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.editor-title-input {
+    width: 100%;
+
+    padding: 10px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    font-size: 20px;
+    font-weight: 700;
+
+    outline: none;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editor-title-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.editor-title-section p {
+    margin: 10px 0 0;
+
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+
+/* ----------------------------------------
+   Actions d'en-tête
+   ---------------------------------------- */
+
+.editor-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.editor-save {
+    padding: 11px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--primary);
+    color: white;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.editor-save:hover {
+    background: var(--primary-dark);
+}
+
+.editor-save:active {
+    transform: scale(0.98);
+}
+
+.editor-save:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.editor-secondary {
+    padding: 11px 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface);
+
+    color: #334155;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.editor-secondary:hover {
+    background: var(--surface-secondary);
+    border-color: #94a3b8;
+}
+
+.editor-secondary:active {
+    transform: scale(0.98);
+}
+
+
+/* ----------------------------------------
+   Layout principal
+   ---------------------------------------- */
+
+.editor-layout {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+
+    gap: 28px;
+
+    overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+    .editor-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ============================================================
+   COLONNE DIALOGUE
+   ============================================================ */
+
+.editor-dialogue {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    height: 100%;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 12px;
+    padding-bottom: 32px;
+
+    scrollbar-width: thin;
+}
+
+.editor-dialogue::-webkit-scrollbar {
+    width: 8px;
+}
+
+.editor-dialogue::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.editor-dialogue::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* ----------------------------------------
+   Une réplique
+   ---------------------------------------- */
+
+.editor-line {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 18px 20px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editor-line:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.editor-line:focus-within {
+    border-color: var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.editor-line.recruteur {
+    border-left: 4px solid #94a3b8;
+}
+
+.editor-line.candidat {
+    border-left: 4px solid var(--primary);
+}
+
+
+/* ----------------------------------------
+   En-tête de la réplique
+   ---------------------------------------- */
+
+.editor-line-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editor-role {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 3px 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+}
+
+.editor-line.recruteur .editor-role {
+    background: #eef2f7;
+    color: #475569;
+}
+
+.editor-line.candidat .editor-role {
+    background: #dbeafe;
+    color: var(--primary);
+}
+
+.editor-number {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #94a3b8;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ----------------------------------------
+   Textarea de la réplique
+   ---------------------------------------- */
+
+.editor-text {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface-secondary);
+
+    color: var(--text);
+
+    font: inherit;
+    font-size: 15px;
+    line-height: 1.5;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editor-text:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* ----------------------------------------
+   Compteur de mots
+   ---------------------------------------- */
+
+.editor-text-meta {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: -4px;
+}
+
+.editor-text-count {
+    font-size: 11px;
+
+    color: #94a3b8;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ----------------------------------------
+   Actions sur une réplique
+   ---------------------------------------- */
+
+.editor-line-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 8px;
+
+    padding-top: 8px;
+
+    border-top: 1px solid #f1f5f9;
+}
+
+.editor-action {
+    padding: 7px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--surface);
+
+    color: #334155;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.editor-action:hover {
+    background: var(--surface-secondary);
+    border-color: #94a3b8;
+}
+
+.editor-action:active {
+    transform: scale(0.97);
+}
+
+.editor-action[data-action="up"],
+.editor-action[data-action="down"] {
+    padding: 7px 11px;
+
+    font-size: 14px;
+    line-height: 1;
+}
+
+.editor-action-small {
+    padding: 5px 10px;
+
+    font-size: 12px;
+}
+
+.editor-delete {
+    margin-left: auto;
+
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.editor-delete:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+}
+
+
+/* ============================================================
+   ALTERNATIVES
+   ============================================================ */
+
+.editor-alternatives {
+    margin-top: 4px;
+
+    padding: 12px 14px;
+
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+
+    background: #fbfcfe;
+}
+
+.editor-alternatives-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.editor-alternatives-count {
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.editor-alternatives-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.editor-alternative {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    padding: 8px 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--surface);
+}
+
+.editor-alternative-text {
+    flex: 1;
+
+    padding: 6px 8px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--text);
+
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+
+    resize: vertical;
+
+    outline: none;
+
+    min-height: 32px;
+}
+
+.editor-alternative-text::placeholder {
+    color: #94a3b8;
+}
+
+.editor-alternative-delete {
+    flex-shrink: 0;
+
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.editor-alternative-delete:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.editor-sidebar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    height: 100%;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 8px;
+    padding-bottom: 32px;
+
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+}
+
+.editor-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.editor-sidebar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.editor-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+@media (max-width: 1100px) {
+    .editor-sidebar {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+
+/* ----------------------------------------
+   Panneau générique
+   ---------------------------------------- */
+
+.editor-panel {
+    flex-shrink: 0;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+}
+
+.editor-panel-header h2 {
+    margin: 0 0 6px;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.editor-panel-header p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ----------------------------------------
+   Onglets
+   ---------------------------------------- */
+
+.editor-tabs {
+    display: flex;
+
+    margin-top: 20px;
+
+    padding: 4px;
+
+    border-radius: 10px;
+
+    background: var(--surface-secondary);
+
+    gap: 4px;
+}
+
+.editor-tab {
+    flex: 1;
+
+    padding: 9px 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-weight: 600;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editor-tab:hover {
+    color: var(--text);
+}
+
+.editor-tab.active {
+    background: var(--surface);
+
+    color: var(--primary);
+
+    box-shadow:
+        0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ----------------------------------------
+   Synthèse vocale
+   ---------------------------------------- */
+
+.editor-speech-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 16px;
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: var(--surface-secondary);
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.editor-speech-toggle:hover {
+    background: #f1f5f9;
+}
+
+.editor-speech-toggle input {
+    width: 17px;
+    height: 17px;
+
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.editor-speech-toggle span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.editor-speech-status {
+    margin-top: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.editor-voice-current {
+    margin-top: 20px;
+}
+
+
+/* ----------------------------------------
+   Champs de formulaire
+   ---------------------------------------- */
+
+.editor-field {
+    display: block;
+}
+
+.editor-field > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #334155;
+}
+
+.editor-voice-select {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    color: #334155;
+
+    font: inherit;
+
+    outline: none;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editor-voice-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* ----------------------------------------
+   Curseurs
+   ---------------------------------------- */
+
+.editor-range {
+    margin-top: 16px;
+}
+
+.editor-range-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #334155;
+}
+
+.editor-range-header output {
+    color: var(--text-secondary);
+
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.editor-range input[type="range"] {
+    width: 100%;
+
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+
+/* ----------------------------------------
+   Bouton « Tester la voix »
+   ---------------------------------------- */
+
+.editor-voice-test {
+    width: 100%;
+
+    margin-top: 18px;
+    padding: 9px 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    color: #334155;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.editor-voice-test:hover {
+    background: var(--surface-secondary);
+    border-color: #94a3b8;
+}
+
+.editor-voice-test:active {
+    transform: scale(0.98);
+}
+
+
+/* ============================================================
+   AVATARS (éditeur)
+   ============================================================ */
+
+.editor-avatar-current {
+    margin-top: 20px;
+}
+
+.editor-avatar-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.editor-avatar-preview-circle {
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background-color: #eef2f7;
+
+    background-repeat: no-repeat;
+
+    box-shadow:
+        0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.editor-avatar-preview-label {
+    font-size: 11px;
+
+    color: #94a3b8;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.editor-avatar-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.editor-avatar-choice {
+    padding: 0;
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.editor-avatar-choice:hover {
+    border-color: #cbd5e1;
+    transform: scale(1.05);
+}
+
+.editor-avatar-choice.selected {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.editor-avatar-choice-circle {
+    width: 100%;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background-color: #eef2f7;
+
+    background-repeat: no-repeat;
+}
+
+
+/* ============================================================
+   AJOUTER UNE RÉPLIQUE
+   ============================================================ */
+
+.editor-add {
+    flex-shrink: 0;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+}
+
+.editor-add h2 {
+    margin: 0 0 6px;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.editor-add-description {
+    margin: 0 0 16px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.editor-role-choice {
+    display: flex;
+    gap: 10px;
+}
+
+.editor-role-button {
+    flex: 1;
+
+    padding: 10px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    color: #334155;
+
+    font-weight: 600;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.editor-role-button:hover {
+    background: var(--surface-secondary);
+    border-color: #94a3b8;
+}
+
+.editor-role-button.selected {
+    border-color: var(--primary);
+    background: #eff6ff;
+    color: var(--primary);
+}
+
+.editor-add-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.editor-add-form label {
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #334155;
+}
+
+.editor-add-form textarea {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: var(--surface-secondary);
+
+    color: var(--text);
+
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editor-add-form textarea:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.editor-add-button {
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: white;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.editor-add-button:hover {
+    background: var(--primary-dark);
+}
+
+.editor-add-button:active {
+    transform: scale(0.98);
+}
+
+
+/* ============================================================
+   NOTIFICATIONS
+   ============================================================ */
+
+.editor-notification {
+    position: fixed;
+
+    bottom: 32px;
+    left: 50%;
+
+    transform: translate(-50%, 20px);
+
+    padding: 14px 22px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: white;
+
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.18);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+    z-index: 9999;
+
+    max-width: min(560px, calc(100vw - 64px));
+
+    text-align: center;
+}
+
+.editor-notification.visible {
+    opacity: 1;
+
+    transform: translate(-50%, 0);
+}
+
+.editor-notification-success {
+    background: #16a34a;
+}
+
+.editor-notification-error {
+    background: #dc2626;
+}
+
+.editor-notification-info {
+    background: #2563eb;
+}
+
+
+/* ============================================================
+   POIGNÉE DE DRAG & DROP
+   ============================================================ */
+
+.editor-line-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editor-drag-handle {
+    padding: 4px 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    font-size: 16px;
+    line-height: 1;
+
+    cursor: grab;
+
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.editor-drag-handle:hover {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.editor-drag-handle:active {
+    cursor: grabbing;
+}
+
+.editor-line.dragging {
+    opacity: 0.4;
+    border-style: dashed;
+    cursor: grabbing;
+}
+
+.editor-line.drag-over-top {
+    border-top: 3px solid var(--primary);
+}
+
+.editor-line.drag-over-bottom {
+    border-bottom: 3px solid var(--primary);
+}
+
+
+/* ============================================================
+   INDICATEUR DE MODIFICATIONS
+   ============================================================ */
+
+.editor-save.editor-save-modified {
+    position: relative;
+}
+
+.editor-save.editor-save-modified::after {
+    content: "";
+
+    position: absolute;
+
+    top: -4px;
+    right: -4px;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+
+    background: #f59e0b;
+
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3);
+}
+
+/* ============================================================
+   COLONNE PRINCIPALE (timeline + dialogue)
+   ============================================================ */
+
+.editor-main-column {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    height: 100%;
+    min-height: 0;
+}
+
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+
+.editor-timeline {
+    flex-shrink: 0;
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+}
+
+.editor-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: var(--text-secondary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.editor-timeline-hint {
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+.editor-timeline-track {
+    display: flex;
+    gap: 6px;
+
+    padding: 6px 4px;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+}
+
+.editor-timeline-track::-webkit-scrollbar {
+    height: 6px;
+}
+
+.editor-timeline-track::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+
+/* ----------------------------------------
+   Bloc de réplique
+   ---------------------------------------- */
+
+.editor-timeline-block {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 2px;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+
+    background: var(--surface-secondary);
+
+    color: #334155;
+
+    font-family: inherit;
+
+    cursor: grab;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.editor-timeline-block:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+.editor-timeline-block:active {
+    cursor: grabbing;
+}
+
+.editor-timeline-block:focus {
+    outline: none;
+}
+
+.editor-timeline-block.recruteur {
+    background: #eef2f7;
+    color: #475569;
+}
+
+.editor-timeline-block.candidat {
+    background: #dbeafe;
+    color: var(--primary);
+}
+
+.editor-timeline-number {
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.editor-timeline-role {
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+
+    opacity: 0.65;
+}
+
+
+/* Bloc actif (visible dans la liste) */
+.editor-timeline-block.active {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+
+/* Bloc en cours de drag */
+.editor-timeline-block.dragging {
+    opacity: 0.4;
+
+    cursor: grabbing;
+}
+
+
+/* Indicateurs de destination */
+.editor-timeline-block.drag-over-left {
+    box-shadow:
+        -3px 0 0 var(--primary),
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.editor-timeline-block.drag-over-right {
+    box-shadow:
+        3px 0 0 var(--primary),
+        0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+
+/* ============================================================
+   HIGHLIGHT QUAND ON CLIQUE UN BLOC
+   ============================================================ */
+
+.editor-line.editor-line-highlight {
+    animation: editor-flash 0.9s ease;
+}
+
+@keyframes editor-flash {
+    0% {
+        box-shadow:
+            0 0 0 4px rgba(37, 99, 235, 0.3);
+    }
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
+
+/* ============================================================
+   DESCRIPTION DE L'ENTRETIEN
+   ============================================================ */
+
+.editor-description-label {
+    margin-top: 16px;
+}
+
+.editor-description-input {
+    font-size: 15px;
+    font-weight: 500;
+
+    color: #475569;
+}
+
+.editor-description-input:focus {
+    color: var(--text);
+}

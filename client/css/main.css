@@ -1,0 +1,213 @@
+:root {
+    --background: #f4f6f8;
+    --surface: #ffffff;
+    --surface-secondary: #f8fafc;
+
+    --text: #17202a;
+    --text-secondary: #667085;
+
+    --border: #e4e7ec;
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --recruiter: #eef2f7;
+    --candidate: #2563eb;
+
+    --radius: 14px;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /* Le body ne scrolle JAMAIS */
+    overflow: hidden;
+}
+
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+/*
+ * En-tête principal
+ */
+
+.application-header {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 32px;
+
+    background: var(--surface);
+
+    border-bottom: 1px solid var(--border);
+
+    flex-shrink: 0;
+}
+
+
+/*
+ * Application
+ */
+
+.application {
+    width: 100%;
+
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+
+    overflow: hidden;
+}
+
+
+/*
+ * Vues
+ */
+
+.view {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+.view.active {
+    display: block;
+}
+
+
+/*
+ * Lecteur
+ */
+
+#player {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+/*
+ * Éditeur — ne scrolle plus lui-même :
+ * c'est .editor-dialogue qui gère le scroll.
+ */
+
+#editor {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: var(--background);
+}
+
+
+/*
+ * Marque
+ */
+
+.brand {
+    display: flex;
+    align-items: baseline;
+
+    gap: 4px;
+}
+
+
+.brand-name {
+    font-size: 21px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+
+.brand-suffix {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--primary);
+}
+
+
+/*
+ * Navigation
+ */
+
+.main-navigation {
+    display: flex;
+
+    gap: 6px;
+}
+
+
+.navigation-button {
+    border: 0;
+
+    background: transparent;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    color: var(--text-secondary);
+
+    font-weight: 600;
+}
+
+
+.navigation-button:hover {
+    background: var(--surface-secondary);
+
+    color: var(--text);
+}
+
+
+.navigation-button.active {
+    background: #eff6ff;
+
+    color: var(--primary);
+}

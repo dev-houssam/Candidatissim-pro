@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Candidatissim-pro</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/player.css">
+    <link rel="stylesheet" href="/css/editor.css">
+
+</head>
+
+<body>
+
+    <header class="application-header">
+
+        <div class="brand">
+            <span class="brand-name">Candidatissim</span>
+            <span class="brand-suffix">pro</span>
+        </div>
+
+        <nav class="main-navigation">
+
+            <button
+                class="navigation-button active"
+                data-view="simulation"
+            >
+                Simulation
+            </button>
+
+            <button
+                class="navigation-button"
+                data-view="editor"
+            >
+                Éditeur
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main class="application">
+
+        <section
+            id="simulation-view"
+            class="view active"
+        >
+
+            <div id="player"></div>
+
+        </section>
+
+
+        <section
+            id="editor-view"
+            class="view"
+        >
+
+            <div id="editor"></div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="/js/app.js"></script>
+
+</body>
+
+</html>
